@@ -86,23 +86,24 @@ const Home = () => {
           ))}
         </Games>
       </AnimateSharedLayout>
+      <br /><br /><br />
     </GameList>
   );
 };
 
 const GameList = styled(motion.div)`
-  padding: 0rem 5rem;
+  padding: 0rem 3rem;
   h2 {
-    padding: 5rem 0rem;
+    padding: 3rem 0rem;
   }
 `;
 
 const Games = styled(motion.div)`
   min-height: 80vh;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
   grid-column-gap: 3rem;
-  grid-row-gap: 5rem;
+  grid-row-gap: 3rem;
 `;
 
 export default Home;
