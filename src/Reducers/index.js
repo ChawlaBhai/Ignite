@@ -1,22 +1,10 @@
-import gamesReducers from "./gamesReducers";
-import detailsReducer from "./detailsReducer";
 import { combineReducers } from "redux";
-
-// const initState = {
-// 	name: "",
-// 	isLogged: false,
-// };
-
-// const userReducer = (state = initState, action) => {
-// 	switch (action.type) {
-// 		default:
-// 			return { ...state };
-// 	}
-// };
+import gamesReducer from "./gamesReducer";
+import detailReducer from "./detailReducer";
 
 const rootReducer = combineReducers({
-	games: gamesReducers,
-	details: detailsReducer,
+  games: gamesReducer,
+  detail: detailReducer,
 });
 
 export default rootReducer;

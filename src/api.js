@@ -1,44 +1,46 @@
 //Base URL
-const base_url = "https://api.rawg.io/api";
+const base_url = "https://api.rawg.io/api/";
 
-//Api Key
-const key = "&key=37748d8312e1462496e6c19eee3af89c";
-
-//getting the date
-const getCurrentDay = () => {
-	const day = new Date().getDate();
-	if (day < 10) return `0${day}`;
-	else return day;
-};
+//Getting the date
 const getCurrentMonth = () => {
-	const month = new Date().getMonth() + 1;
-	if (month < 10) return `0${month}`;
-	else return month;
+  const month = new Date().getMonth() + 1;
+  if (month < 10) {
+    return `0${month}`;
+  } else {
+    return month;
+  }
+};
+//Getting the date
+const getCurrentDay = () => {
+  const day = new Date().getDate();
+  if (day < 10) {
+    return `0${day}`;
+  } else {
+    return day;
+  }
 };
 
-//current day/month/year
-const day = getCurrentDay();
-const month = getCurrentMonth();
-const year = new Date().getFullYear();
-const currentDate = `${year}-${month}-${day}`;
-const lastYear = `${year - 1}-${month}-${day}`;
-const nextYear = `${year + 1}-${month}-${day}`;
+//Current day/month/year
+const currentYear = new Date().getFullYear();
+const currentMonth = getCurrentMonth();
+const currentDay = getCurrentDay();
+const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+const lastYear = `${currentYear - 1}-${currentMonth}-${currentDay}`;
+const nextYear = `${currentYear + 1}-${currentMonth}-${currentDay}`;
 
-//fetch games
-const popular_games = `/games?dates=${lastYear},${currentDate}&ordering=-rating&page_size=13`;
-const upcoming_games = `/games?dates=${currentDate},${nextYear}&ordering=-added&page_size=13`;
-const latest_games = `/games?dates=${lastYear},${currentDate}&ordering=-released&page_size=13`;
+//Popular Games
+const popular_games = `games?dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
+const upcoming_games = `games?dates=${currentDate},${nextYear}&ordering=-added&page_size=10`;
+const newGames = `games?dates=${lastYear},${currentDate}&ordering=-released&page_size=10`;
 
-//exports
-export const popularGamesURL = () => base_url + popular_games + key;
-export const upcomingGamesURL = () => base_url + upcoming_games + key;
-export const latestGamesURL = () => base_url + latest_games + key;
-//Game Details
-export const gameDetailsURL = (gameID) =>
-	base_url + "/games/" + gameID + "?" + key;
-//Game Screenshots
-export const gameScreenshotsURL = (gameID) =>
-	base_url + "/games/" + gameID + "/screenshots?" + key;
-//Search Game URL
+export const popularGamesURL = () => `${base_url}${popular_games}`;
+export const upcomingGamesURL = () => `${base_url}${upcoming_games}`;
+export const newGamesURL = () => `${base_url}${newGames}`;
+//GAME DETAILS
+export const gameDetailsURL = (game_id) => `${base_url}games/${game_id}`;
+//Game ScreenShots
+export const gameScreenshotURL = (game_id) =>
+  `${base_url}games/${game_id}/screenshots`;
+//Searched game
 export const searchGameURL = (game_name) =>
-	base_url + "/games?search=" + game_name + "&page_size=9" + key;
+  `${base_url}games?search=${game_name}&page_size=9`;

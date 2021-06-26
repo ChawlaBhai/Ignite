@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+//Animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import logo from "../img/logo.svg";
-import { fetchSearch } from "../actions/gamesActions";
+//Redux and Routes
+import { fetchSearch } from "../actions/gamesAction";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { fadeIn } from "../animations";
 
 const Nav = () => {
 	const dispatch = useDispatch();
 	const [textInput, setTextInput] = useState("");
-	const searchHandler = (e) => {
+
+	const inputHandler = (e) => {
+		setTextInput(e.target.value);
+	};
+	const submitSearch = (e) => {
 		e.preventDefault();
 		dispatch(fetchSearch(textInput));
 		setTextInput("");
@@ -17,20 +23,17 @@ const Nav = () => {
 	const clearSearched = () => {
 		dispatch({ type: "CLEAR_SEARCHED" });
 	};
-
 	return (
-		<StyledNav>
+		<StyledNav variants={fadeIn} initial="hidden" animate="show">
 			<Logo onClick={clearSearched}>
 				<img src={logo} alt="logo" />
 				<h1>Ignite</h1>
 			</Logo>
-			<form className="search" onSubmit={searchHandler}>
-				<input
-					value={textInput}
-					type="text"
-					onChange={(e) => setTextInput(e.target.value)}
-				/>
-				<button type="submit">Search</button>
+			<form className="search">
+				<input value={textInput} onChange={inputHandler} type="text" />
+				<button onClick={submitSearch} type="submit">
+					Search
+				</button>
 			</form>
 		</StyledNav>
 	);
@@ -60,15 +63,15 @@ const StyledNav = styled(motion.div)`
 		clip-path: inset(-30px -30px -30px 0px);
 	}
 `;
+
 const Logo = styled(motion.div)`
 	display: flex;
-	cursor: pointer;
-	padding: 1rem;
 	justify-content: center;
+	padding: 1rem;
+	cursor: pointer;
 	img {
-		margin: 4px;
-		width: 2rem;
 		height: 2rem;
+		width: 2rem;
 	}
 `;
 
